@@ -1,0 +1,6 @@
+lightline.vim
+neobundle.vim
+vim-easy-align
+vim-fugitive
+vim-gitgutter
+vim-go
