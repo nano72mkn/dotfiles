@@ -1,0 +1,32 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]] # カーソル位置のコンテキストに合わせてftを切り替える
+repo = 'osyo-manga/vim-precious'
+depends = ['context_filetype.vim']
+
+[[plugins]] # カーソル位置のコンテキストのftを判定するライブラリ
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]] # toml syntax
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
+
+# other plugins
+# :
+
+[[plugins]] # lightline
+repo = 'itchyny/lightline.vim'
+
+[[plugins]] # git
+repo = 'tpope/vim-fugitive'
+
+[[plugins]] # git 差分表示
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]] # 整形
+repo = 'junegunn/vim-easy-align'
+
+[[plugins]] # go lang
+repo = 'fatih/vim-go' 
