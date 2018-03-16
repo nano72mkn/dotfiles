@@ -12,9 +12,9 @@ compinit
 autoload colors
 colors
 #PROMPT="%{$fg[green]%}%m%(!.#.$) %{$reset_color%}"
-PROMPT="
- %{${fg[cyan]}%}%~%{${reset_color}%} 
- [%n@%m]"
+#PROMPT="
+# %{${fg[cyan]}%}%~%{${reset_color}%} 
+# [%n@%m]"
 #PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
 PROMPT2='[%n]> '
 SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
@@ -36,6 +36,8 @@ zstyle ':vcs_info:*' actionformats '[%b|%a]'
  #rebase 途中,merge コンフリクト等 formats 外の表示
 
 precmd () { vcs_info }
-PROMPT=$PROMPT'${vcs_info_msg_0_} %{${fg[red]}%}%}$%{${reset_color}%} '
+PROMPT='
+%{${fg[cyan]}%}%~%{${reset_color}%} ${vcs_info_msg_0_}
+%n@%m %{${fg[red]}%}%}❯%{${reset_color}%} '
 
 
