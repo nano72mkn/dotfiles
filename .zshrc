@@ -17,7 +17,7 @@ colors
 # [%n@%m]"
 #PROMPT2="%{$fg[green]%}%_> %{$reset_color%}"
 PROMPT2='[%n]> '
-SPROMPT="%{$fg[red]%}correct: %R -> %r [nyae]? %{$reset_color%}"
+SPROMPT="%{$fg[red]%}correct: %R -> %r [n/y/a/e]? %{$reset_color%}"
 #RPROMPT="%{$fg[cyan]%}[%~]%{$reset_color%}"
 
 #PROMPT git
