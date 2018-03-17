@@ -36,8 +36,15 @@ zstyle ':vcs_info:*' actionformats '[%b|%a]'
  #rebase 途中,merge コンフリクト等 formats 外の表示
 
 precmd () { vcs_info }
-PROMPT='
+
+# color
+blue_g1='%{[38;5;082m%}'
+blue_g2='%{[38;5;085m%}'
+blue_g3='%{[38;5;087m%}'
+reset='%{[0m%}'
+
+PROMPT="
 %{${fg[cyan]}%}%~%{${reset_color}%} ${vcs_info_msg_0_}
-%n@%m %{${fg[red]}%}%}❯%{${reset_color}%} '
+%n@%m ${blue_g1}❯${blue_g2}❯${blue_g3}❯${reset} "
 
 

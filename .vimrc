@@ -37,6 +37,9 @@ if has("syntax")
     syntax on
 endif
 
+set background=dark
+colorscheme hybrid
+
 set number
 set title
 set ambiwidth=double
