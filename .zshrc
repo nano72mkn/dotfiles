@@ -8,6 +8,11 @@ setopt nobeep
 autoload -U compinit
 compinit
 
+#LS_COLORSを設定しておく
+export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+#ファイル補完候補に色を付ける
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
 # PROMPT
 autoload colors
 colors
@@ -23,6 +28,23 @@ SPROMPT="%{$fg[red]%}correct: %R -> %r [n/y/a/e]? %{$reset_color%}"
 #PROMPT git
 autoload -Uz vcs_info
 setopt prompt_subst
+
+#zstyle ':vcs_info:*' enable git svn
+#zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a] '
+#zstyle ':vcs_info:*' formats       '(%s)-[%b] '
+#zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b:%r'
+
+#zstyle ':completion:*' menu select
+#zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
+#precmd() {
+#    print -Pn "\e]0;%~\a"
+#    vcs_info
+#}
+
+#preexec() {
+#    print -Pn "\e]0;%~ :: $1\a"
+#}
 
 zstyle ':vcs_info:git:*' check-for-changes true
  #formats 設定項目で %c,%u が使用可
@@ -43,8 +65,14 @@ blue_g2='%{[38;5;085m%}'
 blue_g3='%{[38;5;087m%}'
 reset='%{[0m%}'
 
+# color
+blue_g1='%{[38;5;082m%}'
+blue_g2='%{[38;5;085m%}'
+blue_g3='%{[38;5;087m%}'
+reset='%{[0m%}'
+
 PROMPT="
-%{${fg[cyan]}%}%~%{${reset_color}%} ${vcs_info_msg_0_}
-%n@%m ${blue_g1}❯${blue_g2}❯${blue_g3}❯${reset} "
+ %{${fg[cyan]}%}%~%{${reset_color}%} ${vcs_info_msg_0_}
+ %n@%m ${blue_g1}❯${blue_g2}❯${blue_g3}❯${reset} "
 
 
