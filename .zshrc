@@ -37,15 +37,6 @@ setopt prompt_subst
 #zstyle ':completion:*' menu select
 #zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
-#precmd() {
-#    print -Pn "\e]0;%~\a"
-#    vcs_info
-#}
-
-#preexec() {
-#    print -Pn "\e]0;%~ :: $1\a"
-#}
-
 zstyle ':vcs_info:git:*' check-for-changes true
  #formats 設定項目で %c,%u が使用可
 zstyle ':vcs_info:git:*' stagedstr "%F{green}!"
@@ -75,4 +66,9 @@ PROMPT="
  %{${fg[cyan]}%}%~%{${reset_color}%} ${vcs_info_msg_0_}
  %n@%m ${blue_g1}❯${blue_g2}❯${blue_g3}❯${reset} "
 
+alias ssh='ssh -A'
 
+# チャットワークcommand
+alias chiru='curl -X POST -H "X-ChatWorkToken: 0d90648bebe7f1ce79e99d0a9b281562" -d "body=お昼に出ます" "https://api.chatwork.com/v2/rooms/94028134/messages"'
+
+alias ergomap='less /Volumes/DropBox/Dropbox\ \(個人\)/develop/ergodox/keyboards/ergodox_ez/keymaps/ms_custom/keymap.c'

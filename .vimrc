@@ -57,3 +57,78 @@ set laststatus=2 " ステータスラインを常に表示
 set showmode " 現在のモードを表示
 set showcmd " 打ったコマンドをステータスラインの下に表示
 set ruler " ステータスラインの右側にカーソルの現在位置を表示する
+
+
+
+
+
+
+
+" 間違えそうなバインドを調整(事故の素) 
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+nnoremap ; :
+cmap w1 w!
+cmap q1 q!
+
+" 使いたくないバインドを殺す
+nnoremap ZZ <Nop>
+" ZQで終了させない
+nnoremap ZQ <Nop>
+" QでEXモードに入れない
+nnoremap Q <Nop>
+
+" jjでエスケープ
+inoremap jj    <ESC>
+" c-lでエスケープ
+inoremap <C-l> <ESC>
+inoremap <C-l> <ESC>
+vnoremap <C-l> <ESC>
+
+
+" 行移動は表示にあわせる
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
+
+" 右移動は折りたたみを開くも兼ねる
+nnoremap <expr>l  foldclosed('.') != -1 ? 'zo' : 'l'
+
+" 権限の無いファイル用sudoで書き込み
+cnoremap w!! w ! sudo tee %
+
+" vを二回で行末まで選択
+vnoremap v $h
+
+"---------------------------------------------------------------------------
+" タブ操作
+"---------------------------------------------------------------------------
+nmap T :tabnew<CR>
+nmap <silent> tn :tabnext<CR>
+nmap <silent> tp :tabprevius<CR>
+nmap <silent> te :tabedit<space>a
+" タブ移動のショートカット
+nnoremap <c-g> <nop>
+nnoremap <c-g> gt
+imap <buffer> <c-g> <c-o><c-g>
+
+
+"---------------------------------------------------------------------------
+" ウィンドウ操作
+"---------------------------------------------------------------------------
+" インサートモード中でも c-wが使えるようにする 
+inoremap <c-w> <c-o><c-w>
+
+" リサイズ
+nmap <silent> <C-L> <C-w>>
+nmap <silent> <C-H> <C-w><
+nmap <silent> <C-K> <C-w>+
+nmap <silent> <C-J> <C-w>>
+
+" 移動
+nmap <C-j> <C-w>w
+nmap <C-k> <C-w>W
+nmap <C-h> <C-w><
+nmap <C-l> <C-w>>

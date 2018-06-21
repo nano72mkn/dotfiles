@@ -29,4 +29,7 @@ repo = 'airblade/vim-gitgutter'
 repo = 'junegunn/vim-easy-align'
 
 [[plugins]] # go lang
-repo = 'fatih/vim-go' 
+repo = 'fatih/vim-go'
+
+ [[plugins]] # NERDTree
+ repo = 'scrooloose/nerdtree'
