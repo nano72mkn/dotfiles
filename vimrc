@@ -1,5 +1,5 @@
 if !&compatible
-	set nocompatible
+  set nocompatible
 endif
 
 " reset augroup
@@ -59,7 +59,8 @@ set showcmd " 打ったコマンドをステータスラインの下に表示
 set ruler " ステータスラインの右側にカーソルの現在位置を表示する
 set backspace=indent,eol,start " バックスペースを使えるように
 
-
+" NERDTreeToggle
+nnoremap se :NERDTreeToggle<CR>
 
 
 
