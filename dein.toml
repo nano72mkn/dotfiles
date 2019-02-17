@@ -14,7 +14,6 @@ on_ft = 'toml'
 
 
 # other plugins
-# :
 
 [[plugins]] # lightline
 repo = 'itchyny/lightline.vim'
@@ -31,5 +30,8 @@ repo = 'junegunn/vim-easy-align'
 [[plugins]] # go lang
 repo = 'fatih/vim-go'
 
- [[plugins]] # NERDTree
- repo = 'scrooloose/nerdtree'
+[[plugins]] # NERDTree
+repo = 'scrooloose/nerdtree'
+
+[[plugins]] # カラースキーム
+repo = 'w0ng/vim-hybrid'
