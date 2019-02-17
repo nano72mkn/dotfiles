@@ -72,8 +72,4 @@ PROMPT="
  %n@%m ${blue_g1}❯${blue_g2}❯${blue_g3}❯${reset} "
 
 alias ssh='ssh -A'
-
-# チャットワークcommand
-alias chiru='curl -X POST -H "X-ChatWorkToken: 0d90648bebe7f1ce79e99d0a9b281562" -d "body=お昼に出ます" "https://api.chatwork.com/v2/rooms/94028134/messages"'
-
-alias ergomap='less /Volumes/DropBox/Dropbox\ \(個人\)/develop/ergodox/keyboards/ergodox_ez/keymaps/ms_custom/keymap.c'
+alias vim='nvim'
