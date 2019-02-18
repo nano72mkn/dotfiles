@@ -4,6 +4,7 @@ init:
 	make nvim
 	make dein
 	make git
+	make ${HOME}/.fzf/bin/fzf
 
 nvim:
 	mkdir -p ~/.config/nvim
@@ -23,3 +24,9 @@ dein:
 
 git:
 	ln -sf ~/.dotfiles/git/gitconfig ~/.gitconfig
+
+${HOME}/.fzf/bin/fzf: ${HOME}/.fzf
+	yes | ${HOME}/.fzf/install
+${HOME}/.fzf:
+	git clone --depth 1 https://github.com/junegunn/fzf.git $@
+
