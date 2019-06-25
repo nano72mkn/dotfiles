@@ -27,7 +27,7 @@ setopt prompt_subst
 gray_color='%{[38;5;008m%}'
 
 zstyle ':vcs_info:git:*' check-for-change/rue
-zstyle ':vcs_info:git:*' stagedstr "%F{yell}●"
+zstyle ':vcs_info:git:*' stagedstr "%F{green}●"
 zstyle ':vcs_info:git:*' unstagedstr "%F{red}●"
 zstyle ':vcs_info:*' formats "${gray_color}(${reset}%b${gray_color})${reset} %m%c%u%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
@@ -42,7 +42,7 @@ function +vi-git-push-status() {
 		| tr -d ' ')
 
 	if [[ "$ahead" -gt 0 ]]; then
-		hook_com[misc]+="%F{green}●"
+		hook_com[misc]+="%F{yellow}●"
 	fi
 }
 
