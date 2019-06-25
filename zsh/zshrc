@@ -24,14 +24,17 @@ SPROMPT="%{$fg[red]%}correct: %R -> %r [n/y/a/e]? %{$reset_color%}"
 autoload -Uz vcs_info
 setopt prompt_subst
 
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{green}●"
+gray_color='%{[38;5;008m%}'
+
+zstyle ':vcs_info:git:*' check-for-change/rue
+zstyle ':vcs_info:git:*' stagedstr "%F{yell}●"
 zstyle ':vcs_info:git:*' unstagedstr "%F{red}●"
-zstyle ':vcs_info:*' formats "%c%u [%b]%f %m"
+zstyle ':vcs_info:*' formats "${gray_color}(${reset}%b %m%c%u ${gray_color})${reset}"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
 zstyle ':vcs_info:git+set-message:*' hooks \
 	git-push-status
 
+# 未pushを確認
 function +vi-git-push-status() {
 	local ahead
 	ahead=$(command git rev-list origin/master..master 2>/dev/null \
@@ -39,7 +42,7 @@ function +vi-git-push-status() {
 		| tr -d ' ')
 
 	if [[ "$ahead" -gt 0 ]]; then
-		hook_com[misc]+="(${ahead})"
+		hook_com[misc]+="%F{green}●"
 	fi
 }
 
