@@ -25,10 +25,11 @@ autoload -Uz vcs_info
 setopt prompt_subst
 
 zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:git:*' stagedstr "%F{red}● "
 zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
 zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
+
 precmd () { vcs_info }
 
 # color
@@ -37,8 +38,10 @@ blue_g2='%{[38;5;085m%}'
 blue_g3='%{[38;5;087m%}'
 reset='%{[0m%}'
 
+git_prompt='${vcs_info_msg_0_}'
+
 PROMPT="
- %{${fg[cyan]}%}%~%{${reset_color}%} ${vcs_info_msg_0_}
+ %{${fg[cyan]}%}%~%{${reset_color}%} ${git_prompt}
  %n@%m ${blue_g1}❯${blue_g2}❯${blue_g3}❯${reset} "
 
 ######## PROMPT END
