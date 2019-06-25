@@ -29,7 +29,7 @@ gray_color='%{[38;5;008m%}'
 zstyle ':vcs_info:git:*' check-for-change/rue
 zstyle ':vcs_info:git:*' stagedstr "%F{yell}●"
 zstyle ':vcs_info:git:*' unstagedstr "%F{red}●"
-zstyle ':vcs_info:*' formats "${gray_color}(${reset}%b %m%c%u ${gray_color})${reset}"
+zstyle ':vcs_info:*' formats "${gray_color}(${reset}%b${gray_color})${reset} %m%c%u%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
 zstyle ':vcs_info:git+set-message:*' hooks \
 	git-push-status
