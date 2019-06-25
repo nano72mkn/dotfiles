@@ -1,13 +1,16 @@
 [alias]
-	ci = commit
 	st = status
 	co = checkout
+	br = branch
+	ci = commit
+	df = diff
+	gr = grep
 	graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
 [push]
 	default = matching
 [color]
-	ui = true
     diff = true
+    ui = auto
 [include]
     path = ~/.gitconfig.local
 [core]

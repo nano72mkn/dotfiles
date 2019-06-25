@@ -23,7 +23,7 @@ dein:
 	ln -sf ~/.dotfiles/vim/dein.toml ~/dein.toml
 
 git:
-	ln -sf ~/.dotfiles/git/gitconfig ~/.gitconfig
+	cp ~/.dotfiles/git/gitconfig ~/.gitconfig
 
 ~/.fzf/bin/fzf:
 	~/.fzf
