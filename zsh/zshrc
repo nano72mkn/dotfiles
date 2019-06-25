@@ -1,20 +1,19 @@
 # LANG
 export LANG=ja_JP.UTF-8
 
-# ビープ音鳴らさない
-setopt nobeep
-
 # 補完
 autoload -U compinit
 compinit
 
-#LS_COLORSを設定しておく
+######## LS_COLORS
 autoload colors
 colors
 
+# 参考: https://news.mynavi.jp/article/zsh-9/
 export LSCOLORS=exfxcxdxbxegedabagacad
 export LS_COLORS='di=32:ln=34:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 zstyle ':completion:*' list-colors "${LS_COLORS}"
+######## LS_COLORS END
 
 ######## PROMPT
 PROMPT2='[%n]> '
@@ -38,16 +37,16 @@ PROMPT="
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt hist_ignore_dups     # ignore duplication command history list
-setopt share_history        # share command history data 
-setopt extended_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_ignore_all_dups
-setopt hist_ignore_space
-setopt hist_find_no_dups
-setopt hist_save_no_dups
-setopt hist_beep
+setopt share_history          # ヒストリの読み出しと書き込みを同時に行う
+setopt extended_history       # ヒストリにコマンド実行時間を含める
+setopt hist_expire_dups_first # ヒストリが削られる場合、以前入力した同じものを先に削除する
+setopt hist_ignore_dups       # 直前のコマンドと同じコマンドはヒストリに保存しない
+setopt hist_ignore_all_dups   # 以前と同じコマンドはヒストリに保存しない
+setopt hist_ignore_space      # 行頭がスペースのコマンドはヒストリに保存しない
+setopt hist_find_no_dups      # ヒストリ検索時に以前見たものを2度は表示しない
+setopt hist_save_no_dups      # ヒストリファイルに書き出すときに以前のコマンドと同じものを除去する
+setopt hist_beep              # 存在しないヒストリの場合ビープで通知する
+setopt nobeep                 # ビープ音を鳴らさない
 
 # fzf
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
@@ -56,10 +55,11 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# alias
+######## alias
 alias ssh='ssh -A'
 alias vi='nvim'
 
+# ls
 if ls --color -d . &>/dev/null 2>&1
 then
     # Linux Style
