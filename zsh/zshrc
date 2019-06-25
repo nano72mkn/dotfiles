@@ -29,7 +29,17 @@ zstyle ':vcs_info:git:*' stagedstr "%F{green}●"
 zstyle ':vcs_info:git:*' unstagedstr "%F{red}●"
 zstyle ':vcs_info:*' formats "%c%u [%b]%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
-zstyle ':vcs_info:git+set-message:*' git-push-status
+zstyle ':vcs_info:git+set-message:*' hooks \
+	git-hook-begin \
+	git-push-status
+
+function +vi-git-hook-begin() {
+	if [[ $(command git rev-parse --is-inside-work-tree 2> /dev/null) != 'true' ]]; then
+		return 1
+	fi
+
+	return 0
+}
 
 function +vi-git-push-status() {
 	if [[ "$1" != "1" ]]; then
