@@ -63,6 +63,7 @@ precmd() {
     PROMPT_LEFT="${color_1}${NAME} %{${color_2}%}%~%{${reset}%} ${vcs_info_msg_0_}"
     PROMPT_RIGHT="${gray_color} $(date '+ %F %T')"
 
+    print ""
     print -P $PROMPT_LEFT${(r:($COLUMNS-${#PROMPT_LEFT}):: :)}$PROMPT_RIGHT
 }
 
