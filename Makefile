@@ -30,5 +30,5 @@ set_git:
 	yes | ~/.fzf/install
 
 ~/.fzf:
-	git clone --depth 1 https://github.com/junegunn/fzf.git
+	git clone https://github.com/junegunn/fzf.git ~/.fzf
 
