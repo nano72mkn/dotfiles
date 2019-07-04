@@ -4,6 +4,7 @@ init:
 	make set_nvim
 	make set_dein
 	make set_git
+	make set_tmux
 	make ~/.fzf/bin/fzf
 
 set_nvim:
@@ -24,6 +25,9 @@ set_dein:
 
 set_git:
 	cp ~/.dotfiles/git/gitconfig ~/.gitconfig
+
+set_tmux:
+	ln -sf ~/.dotfiles/tmux/tmux.conf ~/.tmux.conf
 
 ~/.fzf/bin/fzf:
 	~/.fzf
