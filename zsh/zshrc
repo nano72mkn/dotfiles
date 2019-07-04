@@ -1,5 +1,5 @@
 # 定数
-NAME="conoha"
+NAME="php56"
 
 # LANG
 export LANG=ja_JP.UTF-8
@@ -7,6 +7,14 @@ export LANG=ja_JP.UTF-8
 # 補完
 autoload -U compinit
 compinit
+
+# SSH_AUTH_SOCK
+for key in SSH_AUTH_SOCK SSH_CONNECTION SSH_CLIENT; do
+    if (tmux show-environment | grep "^${key}" > /dev/null); then
+        value=`tmux show-environment | grep "^${key}" | sed -e "s/^[A-Z_]*=//"`
+        export ${key}="${value}"
+    fi
+done
 
 ######## color
 # 参考: https://qiita.com/k_ui/items/b02b93e3af13023c0bfd
