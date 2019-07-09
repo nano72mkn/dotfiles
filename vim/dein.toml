@@ -43,6 +43,9 @@ hook_add='''
 [[plugins]] # NERDTree
 repo = 'jistr/vim-nerdtree-tabs'
 
+[[plugins]] # NERDTreeにgitの変更マークを表示
+repo = 'Xuyuanp/nerdtree-git-plugin'
+
 [[plugins]] # カラースキーム
 repo = 'w0ng/vim-hybrid'
 
@@ -51,3 +54,12 @@ repo = 'posva/vim-vue'
 
 [[plugins]] # emmet
 repo = 'mattn/emmet-vim'
+
+[[plugins]] # 置換可視化
+repo = 'osyo-manga/vim-over'
+
+[[plugins]] # 検索
+repo = 'ctrlpvim/ctrlp.vim'
+
+[[plugins]] # コメントアウト
+repo = 'tomtom/tcomment_vim'

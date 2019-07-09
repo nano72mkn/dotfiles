@@ -154,3 +154,6 @@ let g:NERDTreeShowBookmarks=1
 "---------------------------------------------------------------------------
 " insertモードの時
 imap <C-e> <C-y>,<CR>
+
+nmap <Space>co gcc
+vmap <Space>co gcc
