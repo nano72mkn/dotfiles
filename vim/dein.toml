@@ -32,6 +32,19 @@ repo = 'fatih/vim-go'
 
 [[plugins]] # NERDTree
 repo = 'scrooloose/nerdtree'
+on_cmd=['NERDTree']
+hook_add='''
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+'''
+[[plugins]] # NERDTree
+repo = 'jistr/vim-nerdtree-tabs'
 
 [[plugins]] # カラースキーム
 repo = 'w0ng/vim-hybrid'
+
+[[plugins]] # vue
+repo = 'posva/vim-vue'
+
+[[plugins]] # emmet
+repo = 'mattn/emmet-vim'
