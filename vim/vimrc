@@ -158,7 +158,23 @@ imap <C-e> <C-y>,<CR>
 "---------------------------------------------------------------------------
 " fzf
 "---------------------------------------------------------------------------
-" insertモードの時
-nmap <C-p> :Rg<CR>
-nmap <C-c> :Commands<CR>
-nmap <C-g> :GFiles<CR>
+
+function! FZFOpen(command_str)
+  if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
+    exe "normal! \<c-w>\<c-w>"
+  endif
+  exe 'normal! ' . a:command_str . "\<cr>"
+endfunction
+
+fun! FzfOmniFiles()
+  let is_git = system('git status')
+  if v:shell_error
+    :Files
+  else
+    :GitFiles
+  endif
+endfun
+
+nmap <C-c> :call FZFOpen(':Commands')<CR>
+nmap <C-p> :call FZFOpen(':call FzfOmniFiles()')<CR>
+nmap <C-g> :call FZFOpen(':Rg')<CR>
