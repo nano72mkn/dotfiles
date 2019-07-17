@@ -73,3 +73,7 @@ hook_add = '''
 
 [[plugins]] # コメントアウト
 repo = 'tomtom/tcomment_vim'
+
+[[plugins]] # 補完
+repo = 'Shougo/deoplete.nvim'
+hook_add = 'let g:deoplete#enable_at_startup = 1'

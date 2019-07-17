@@ -53,6 +53,9 @@ set autoindent
 set expandtab
 set shiftwidth=2
 
+" ハイライトしない
+set nohlsearch
+
 
 " swapファイルを削除
 set noswapfile
