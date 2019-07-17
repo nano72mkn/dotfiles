@@ -48,10 +48,10 @@ set virtualedit=block
 set cursorline
 
 " tab
-set tabstop=4
+set tabstop=2
 set autoindent
 set expandtab
-set shiftwidth=4
+set shiftwidth=2
 
 
 " swapファイルを削除
@@ -155,5 +155,10 @@ let g:NERDTreeShowBookmarks=1
 " insertモードの時
 imap <C-e> <C-y>,<CR>
 
-nmap <Space>co gcc
-vmap <Space>co gcc
+"---------------------------------------------------------------------------
+" fzf
+"---------------------------------------------------------------------------
+" insertモードの時
+nmap <C-p> :Rg<CR>
+nmap <C-c> :Commands<CR>
+nmap <C-g> :GFiles<CR>

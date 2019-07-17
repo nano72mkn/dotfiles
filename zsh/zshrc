@@ -52,18 +52,8 @@ zstyle ':vcs_info:git:*' unstagedstr "%F{red}●"
 zstyle ':vcs_info:*' formats "${gray_color}(${reset}%b${gray_color})${reset} %m%c%u%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
 zstyle ':vcs_info:git+set-message:*' hooks \
-  git-hook-begin \
   git-untracked \
 	git-push-status
-
-function +vi-git-hook-begin() {
-  if [[ $(command git rev-parse --is-inside-work-tree 2> /dev/null) != 'true' ]]; then
-    # 0以外を返すとそれ以降のフック関数は呼び出されない
-    return 1
-  fi
-
-  return 0
-}
 
 # untracked ファイル表示
 #

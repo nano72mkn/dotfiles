@@ -55,7 +55,19 @@ repo = 'mattn/emmet-vim'
 repo = 'osyo-manga/vim-over'
 
 [[plugins]] # 検索
-repo = 'ctrlpvim/ctrlp.vim'
+repo = 'junegunn/fzf'
+build = './install --bin'
+merged = '0'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
+hook_add = '''
+    command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \   'rg --line-number --no-heading '.shellescape(<q-args>), 0,
+      \   fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:50%:wrap'))
+'''
 
 [[plugins]] # コメントアウト
 repo = 'tomtom/tcomment_vim'
