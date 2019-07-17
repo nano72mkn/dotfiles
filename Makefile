@@ -19,7 +19,7 @@ set_vim:
 
 set_zsh:
 	ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
-	ln -sf ~/.dotfiles/zsh/zsh_profile ~/.zsh_profile
+	ln -sf ~/.dotfiles/zsh/zprofile ~/.zprofile
 
 set_dein:
 	ln -sf ~/.dotfiles/vim/dein.toml ~/dein.toml
