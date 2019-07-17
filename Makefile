@@ -1,4 +1,5 @@
 init:
+	make set_zsh_env
 	make set_zsh
 	make set_vim
 	make set_nvim
@@ -16,6 +17,10 @@ set_vim:
 	mkdir -p ~/.vim/colors
 	ln -sf ~/.dotfiles/vim/colors/hybrid.vim ~/.vim/colors/hybrid.vim
 	ln -sf ~/.dotfiles/vim/vimrc ~/.vimrc
+
+set_zsh_env:
+	cp ~/.dotfiles/zsh/zshrc.env.example ~/.dotfiles/zsh/zshrc.env
+	cp ~/.dotfiles/zsh/alias.env.example ~/.dotfiles/zsh/alias.env
 
 set_zsh:
 	ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
