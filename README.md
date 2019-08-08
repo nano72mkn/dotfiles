@@ -1,5 +1,11 @@
 # dotfiles
 
+## 設置
+```
+cd ~
+git clone git@github.com:MiyahiraShota/dotfiles.git .dotfiles
+```
+
 ## tmux
 ### Linux
 やってない
