@@ -8,6 +8,9 @@ cd .dotfiles
 make
 ```
 
+## 必要なやつ
+zsh tmux fzf
+
 ## tmux
 ### Linux
 やってない
