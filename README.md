@@ -9,7 +9,11 @@ make
 ```
 
 ## 必要なやつ
-zsh tmux fzf
+zsh
+
+*あると便利*
+tmux
+fzf
 
 ## tmux
 ### Linux
