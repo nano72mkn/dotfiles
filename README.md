@@ -5,20 +5,21 @@
 cd ~
 git clone git@github.com:MiyahiraShota/dotfiles.git .dotfiles
 cd .dotfiles
-make
+make hogehoge
+```
+hogehogeなしだと全部入ります。  
+
+zshのみはこちら
+```
+make set_zsh_env && make set_zsh
 ```
 
 ## 必要なやつ
 zsh
 
-*あると便利*
+*あると便利*  
 tmux
 fzf
-
-## zshのみ
-```
-make set_zsh_env && make set_zsh
-```
 
 ## tmux
 ### Linux
