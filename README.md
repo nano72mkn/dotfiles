@@ -4,6 +4,8 @@
 ```
 cd ~
 git clone git@github.com:MiyahiraShota/dotfiles.git .dotfiles
+cd .dotfiles
+make
 ```
 
 ## tmux
