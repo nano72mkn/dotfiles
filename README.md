@@ -15,6 +15,11 @@ zsh
 tmux
 fzf
 
+## zshのみ
+```
+make set_zsh_env && make set_zsh
+```
+
 ## tmux
 ### Linux
 やってない
