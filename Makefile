@@ -1,3 +1,6 @@
+setup:
+	sh setup.sh
+
 init:
 	make set_zsh_env
 	make set_zsh
