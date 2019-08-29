@@ -55,7 +55,25 @@ repo = 'mattn/emmet-vim'
 repo = 'osyo-manga/vim-over'
 
 [[plugins]] # 検索
-repo = 'ctrlpvim/ctrlp.vim'
+repo = 'junegunn/fzf'
+build = './install --bin'
+merged = '0'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
+hook_add = '''
+    command! -bang -nargs=* Rg
+      \ call fzf#vim#grep(
+      \ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
+      \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+      \ : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+      \ <bang>0)
+'''
 
 [[plugins]] # コメントアウト
 repo = 'tomtom/tcomment_vim'
+
+[[plugins]] # 補完
+repo = 'Shougo/deoplete.nvim'
+hook_add = 'let g:deoplete#enable_at_startup = 1'
