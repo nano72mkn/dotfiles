@@ -134,7 +134,22 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ######## alias
-source  ~/.dotfiles/zsh/alias.env
+<<<<<<< HEAD
+alias ssh='ssh -A'
+alias vi='nvim'
+alias ll='ls -al'
 
-######## local
-source ~/.dotfiles/zsh/zshrc.local
+# ls
+if ls --color -d . &>/dev/null 2>&1
+then
+    # Linux Style
+    export LS_COLORS=$LS_COLORS
+    alias ls='ls --color=tty'
+else
+    # BSD Style
+	export LSCOLORS=$LSCOLORS
+	alias ls='ls -G'
+fi
+=======
+source  ~/.dotfiles/zsh/alias.env
+>>>>>>> f05acdb95b4123d3fc37a91ca6d59ec654d32f93
