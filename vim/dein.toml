@@ -77,3 +77,12 @@ repo = 'tomtom/tcomment_vim'
 [[plugins]] # 補完
 repo = 'Shougo/deoplete.nvim'
 hook_add = 'let g:deoplete#enable_at_startup = 1'
+
+[[plugins]] # 構文エラー
+repo = "scrooloose/syntastic"
+
+[[plugins]] # swift check
+repo = "kballard/vim-swift"
+
+[[plugins]] # swift
+repo = "keith/swift.vim"
