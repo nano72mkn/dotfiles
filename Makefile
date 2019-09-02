@@ -24,6 +24,7 @@ set_vim:
 set_zsh_env:
 	cp ~/.dotfiles/zsh/zshrc.env.example ~/.dotfiles/zsh/zshrc.env
 	cp ~/.dotfiles/zsh/alias.env.example ~/.dotfiles/zsh/alias.env
+	cp ~/.dotfiles/zsh/zshrc.local.example ~/.dotfiles/zsh/zshrc.local
 
 set_zsh:
 	ln -sf ~/.dotfiles/zsh/zshrc ~/.zshrc
