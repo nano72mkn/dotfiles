@@ -189,7 +189,7 @@ nmap <C-g> :call FZFOpen(':Rg')<CR>
 "---------------------------------------------------------------------------
 " vim-gitgutter
 let g:gitgutter_sign_added = '+'
-let g:gitgutter_sign_modified = '→'
+let g:gitgutter_sign_modified = '~'
 let g:gitgutter_sign_removed = 'x'
 
 let g:lightline = {
@@ -224,3 +224,8 @@ function! MyGitGutter()
   endfor
   return join(ret, ' ')
 endfunction
+
+"---------------------------------------------------------------------------
+" vue js
+"---------------------------------------------------------------------------
+autocmd FileType vue syntax sync fromstart
