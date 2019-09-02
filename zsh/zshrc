@@ -100,11 +100,8 @@ function +vi-git-push-status() {
 
 precmd() {
     vcs_info
-    PROMPT_LEFT="${color_1}${NAME} %{${color_2}%}%~%{${reset}%} ${vcs_info_msg_0_}${vcs_info_msg_1_}${vcs_info_msg_2_}"
-    PROMPT_RIGHT="${gray_color} $(date '+ %F %T')"
-
     print ""
-    print -P $PROMPT_LEFT${(r:($COLUMNS-${#PROMPT_LEFT}):: :)}$PROMPT_RIGHT
+    print -P "${color_1}${NAME}%{${color_2}%}%~%{${reset}%}${vcs_info_msg_0_}${vcs_info_msg_1_}${vcs_info_msg_2_}"
 }
 
 PROMPT="%n@%m ${color_1}❯${color_2}❯${color_3}❯${reset} "
