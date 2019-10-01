@@ -86,3 +86,6 @@ repo = "kballard/vim-swift"
 
 [[plugins]] # swift
 repo = "keith/swift.vim"
+
+[[plugins]] # editorconfig
+repo = "editorconfig/editorconfig-vim"
