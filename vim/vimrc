@@ -33,6 +33,12 @@ endif
 " プラグイン以外のその他設定が続く
 " :
 
+" undo保持
+if has('persistent_undo')
+  set undodir=~/.vim/undo
+  set undofile
+endif
+
 if has("syntax")
     syntax on
 endif
@@ -55,6 +61,9 @@ set shiftwidth=2
 
 " ハイライトしない
 set nohlsearch
+
+" 縦分割時に右に開く
+set splitright
 
 
 " swapファイルを削除

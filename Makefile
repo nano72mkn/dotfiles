@@ -18,6 +18,7 @@ set_nvim:
 
 set_vim:
 	mkdir -p ~/.vim/colors
+	mkdir -p ~/.vim/undo
 	ln -sf ~/.dotfiles/vim/colors/hybrid.vim ~/.vim/colors/hybrid.vim
 	ln -sf ~/.dotfiles/vim/vimrc ~/.vimrc
 
