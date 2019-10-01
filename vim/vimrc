@@ -183,6 +183,7 @@ endfun
 nmap <C-c> :call FZFOpen(':Commands')<CR>
 nmap <C-p> :call FZFOpen(':call FzfOmniFiles()')<CR>
 nmap <C-g> :call FZFOpen(':Rg')<CR>
+nmap <C-n> :call FZFOpen(':History')<CR>
 
 "---------------------------------------------------------------------------
 " status line
