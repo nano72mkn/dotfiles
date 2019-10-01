@@ -135,3 +135,6 @@ source  ~/.dotfiles/zsh/alias.env
 
 ######## local
 source ~/.dotfiles/zsh/zshrc.local
+
+######## tmux
+export TMUX_TMPDIR=~/.dotfiles/tmux/tmp/tmp.tmux
