@@ -1,5 +1,18 @@
 #!/usr/bin/bash
 
+## OSチェック
+if [ "$(uname)" == 'Darwin' ]; then
+  OS='Mac'
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+  OS='Linux'
+else
+  echo "Your platform ($(uname -a)) is not supported."
+  exit 1
+fi
+
+echo "$OS"
+
+## 各関数
 . ./func.sh
 
 echo "セットアップを開始します"
