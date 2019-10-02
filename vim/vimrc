@@ -100,7 +100,6 @@ nnoremap Q <Nop>
 inoremap jj    <ESC>
 " c-lでエスケープ
 inoremap <C-l> <ESC>
-inoremap <C-l> <ESC>
 vnoremap <C-l> <ESC>
 
 
@@ -156,6 +155,7 @@ nmap <C-l> <C-w>>
 " Nerdtree
 "---------------------------------------------------------------------------
 let g:NERDTreeShowBookmarks=1
+autocmd vimenter * NERDTree
 
 "---------------------------------------------------------------------------
 " emmet
