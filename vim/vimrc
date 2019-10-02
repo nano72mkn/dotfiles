@@ -131,7 +131,7 @@ nnoremap <c-g> <nop>
 nnoremap <c-g> gt
 imap <buffer> <c-g> <c-o><c-g>
 " タブを閉じる
-nmap tc :tabc<CR>
+nmap <silent> tc :tabc<CR>
 
 
 "---------------------------------------------------------------------------
