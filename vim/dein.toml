@@ -89,3 +89,6 @@ repo = "keith/swift.vim"
 
 [[plugins]] # editorconfig
 repo = "editorconfig/editorconfig-vim"
+
+[[plugins]] # typescript
+repo = "leafgarland/typescript-vim"
