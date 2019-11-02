@@ -3,6 +3,8 @@
 	co = checkout
 	br = branch
 	ci = commit
+  sw = switch
+  re = restore
 	df = diff
 	gr = grep
 	graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short

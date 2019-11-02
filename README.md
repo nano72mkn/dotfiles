@@ -16,10 +16,9 @@ make set_zsh_env && make set_zsh
 
 ## 必要なやつ
 zsh
-
-*あると便利*  
 tmux
 fzf
+rg
 
 ## tmux
 ### Linux
