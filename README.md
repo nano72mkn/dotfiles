@@ -45,3 +45,8 @@ brew install tmux
 ```
 brew install neovim
 ```
+
+
+npm install --global vscode-html-languageserver-bin
+npm -g install intelephense
+npm install -g vscode-css-languageserver-bin
