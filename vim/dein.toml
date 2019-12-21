@@ -90,5 +90,14 @@ repo = "keith/swift.vim"
 [[plugins]] # editorconfig
 repo = "editorconfig/editorconfig-vim"
 
+[[plugins]] # LSP
+repo = "prabirshrestha/async.vim"
+
+[[plugins]] # LSP
+repo = "prabirshrestha/vim-lsp"
+
+[[plugins]] # 余分な空白ハイライト
+repo = "bronson/vim-trailing-whitespace"
+
 [[plugins]] # typescript
 repo = "leafgarland/typescript-vim"

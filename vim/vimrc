@@ -4,7 +4,7 @@ endif
 
 " reset augroup
 augroup MyAutoCmd
-	autocmd!
+  autocmd!
 augroup END
 
 " dein settings {{{
@@ -248,3 +248,32 @@ set ambiwidth=double
 " ejs
 "---------------------------------------------------------------------------
 au BufNewFile,BufRead *.ejs set filetype=html
+
+
+autocmd InsertLeave * set nopaste
+
+"---------------------------------------------------------------------------
+" intelephense php
+"---------------------------------------------------------------------------
+au User lsp_setup call lsp#register_server({
+    \ 'name': 'intelephense',
+    \ 'cmd': {server_info->['node', expand('~/.nvm/versions/node/v8.11.2/lib/node_modules/intelephense/lib/intelephense.js'), '--stdio']},
+    \ 'initialization_options': {"storagePath": "~/.cache//intelephense"},
+    \ 'whitelist': ['php'],
+    \ })
+
+if executable('html-languageserver')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'html-languageserver',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'html-languageserver --stdio']},
+        \ 'whitelist': ['html'],
+        \ })
+endif
+
+if executable('css-languageserver')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'css-languageserver',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+        \ 'whitelist': ['css', 'less', 'sass'],
+        \ })
+endif
