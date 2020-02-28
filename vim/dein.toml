@@ -45,9 +45,6 @@ repo = 'Xuyuanp/nerdtree-git-plugin'
 [[plugins]] # カラースキーム
 repo = 'w0ng/vim-hybrid'
 
-[[plugins]] # vue
-repo = 'posva/vim-vue'
-
 [[plugins]] # emmet
 repo = 'mattn/emmet-vim'
 
