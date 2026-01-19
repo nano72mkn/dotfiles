@@ -59,6 +59,22 @@ ln -s "$DOTFILES_DIR/lazygit/config.yml" "$CONFIG_DIR/lazygit/config.yml"
 echo "  Symlink created"
 
 # ---------------------
+# mise
+# ---------------------
+echo ""
+echo "[mise] Setting up..."
+
+mkdir -p "$CONFIG_DIR/mise"
+if [ -f "$CONFIG_DIR/mise/config.toml" ] && [ ! -L "$CONFIG_DIR/mise/config.toml" ]; then
+    mv "$CONFIG_DIR/mise/config.toml" "$CONFIG_DIR/mise/config.toml.bak"
+    echo "  Backed up existing config"
+elif [ -L "$CONFIG_DIR/mise/config.toml" ]; then
+    rm "$CONFIG_DIR/mise/config.toml"
+fi
+ln -s "$DOTFILES_DIR/mise/config.toml" "$CONFIG_DIR/mise/config.toml"
+echo "  Symlink created"
+
+# ---------------------
 # Git
 # ---------------------
 echo ""

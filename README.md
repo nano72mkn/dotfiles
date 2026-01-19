@@ -11,6 +11,7 @@ macOS development environment configuration.
 | `zsh/` | zshrc |
 | `starship/` | Prompt config |
 | `lazygit/` | Lazygit config |
+| `mise/` | Runtime versions (Go, Node, etc.) |
 | `Brewfile` | Homebrew packages |
 
 ## Setup
@@ -25,7 +26,10 @@ brew bundle --file=~/dotfiles/Brewfile
 # 3. Create symlinks
 ~/dotfiles/setup.sh
 
-# 4. Restart terminal
+# 4. Install runtimes
+mise install
+
+# 5. Restart terminal
 ```
 
 ## Tools
