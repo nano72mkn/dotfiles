@@ -1,0 +1,40 @@
+[user]
+	name = nano72mkn
+	email = shota+github@code-lab.xyz
+
+[alias]
+	st = status
+	co = checkout
+	ci = commit
+	sw = switch
+	br = branch
+	df = diff
+	lg = log --oneline --graph --decorate
+
+[core]
+	editor = nvim
+	pager = delta
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = false
+
+[push]
+	default = current
+
+[delta]
+	navigate = true
+	line-numbers = true
+	side-by-side = false
+	syntax-theme = Nord
+
+[interactive]
+	diffFilter = delta --color-only
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default

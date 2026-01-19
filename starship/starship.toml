@@ -1,0 +1,75 @@
+# Starship prompt configuration
+# https://starship.rs/config/
+
+# Timeout for commands (ms)
+command_timeout = 1000
+
+# Insert blank line between prompts
+add_newline = true
+
+# Prompt format
+format = """
+$directory\
+$git_branch\
+$git_status\
+$nodejs\
+$python\
+$rust\
+$golang\
+$docker_context\
+$line_break\
+$character"""
+
+# Character
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+
+# Directory
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold cyan"
+
+# Git branch
+[git_branch]
+symbol = " "
+style = "bold purple"
+
+# Git status
+[git_status]
+style = "bold yellow"
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?${count}"
+stashed = "󰏗"
+modified = "!${count}"
+staged = "+${count}"
+deleted = "✘${count}"
+
+# Node.js
+[nodejs]
+symbol = " "
+style = "bold green"
+
+# Python
+[python]
+symbol = " "
+style = "bold yellow"
+
+# Rust
+[rust]
+symbol = " "
+style = "bold red"
+
+# Go
+[golang]
+symbol = " "
+style = "bold cyan"
+
+# Docker
+[docker_context]
+symbol = " "
+style = "bold blue"

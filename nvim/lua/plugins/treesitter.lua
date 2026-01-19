@@ -4,10 +4,6 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-      "windwp/nvim-ts-autotag", -- Auto close/rename HTML tags
-    },
     config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
@@ -40,9 +36,6 @@ return {
         indent = {
           enable = true,
         },
-        autotag = {
-          enable = true,
-        },
         incremental_selection = {
           enable = true,
           keymaps = {
@@ -52,6 +45,17 @@ return {
             node_decremental = "<bs>",
           },
         },
+      })
+    end,
+  },
+
+  -- Textobjects (separate plugin)
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require("nvim-treesitter.configs").setup({
         textobjects = {
           select = {
             enable = true,
@@ -79,6 +83,16 @@ return {
           },
         },
       })
+    end,
+  },
+
+  -- Auto close/rename HTML tags
+  {
+    "windwp/nvim-ts-autotag",
+    event = { "BufReadPost", "BufNewFile" },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require("nvim-ts-autotag").setup()
     end,
   },
 }

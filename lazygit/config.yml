@@ -1,0 +1,45 @@
+# Lazygit configuration
+# https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+
+gui:
+  # Theme
+  theme:
+    activeBorderColor:
+      - blue
+      - bold
+    inactiveBorderColor:
+      - white
+    selectedLineBgColor:
+      - default
+    selectedRangeBgColor:
+      - blue
+  # Show file icons (requires nerd font)
+  showFileIcons: true
+  # Mouse support
+  mouseEvents: true
+  # Border style
+  border: rounded
+
+git:
+  # Auto fetch interval (seconds, 0 = disabled)
+  autoFetch: true
+  autoFetchInterval: 120
+  # Paging
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+
+# Keybindings (default is mostly fine)
+keybinding:
+  universal:
+    quit: q
+    return: <esc>
+
+# Commit settings
+git:
+  commit:
+    signOff: false
+
+os:
+  # Open files with nvim
+  editPreset: "nvim"

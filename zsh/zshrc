@@ -1,0 +1,133 @@
+# ===========================================
+# Zsh configuration
+# ===========================================
+
+# ---------------------
+# History
+# ---------------------
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+
+# ---------------------
+# Options
+# ---------------------
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt CORRECT
+
+# ---------------------
+# Aliases
+# ---------------------
+alias vim="nvim"
+alias vi="nvim"
+alias lg="lazygit"
+alias g="git"
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit"
+alias gp="git push"
+alias gl="git pull"
+
+# eza (modern ls)
+if command -v eza &> /dev/null; then
+    alias ls="eza --icons"
+    alias ll="eza -la --icons"
+    alias la="eza -a --icons"
+    alias lt="eza --tree --icons"
+fi
+
+# bat (modern cat)
+if command -v bat &> /dev/null; then
+    alias cat="bat --paging=never"
+fi
+
+# ---------------------
+# Starship prompt
+# ---------------------
+if command -v starship &> /dev/null; then
+    eval "$(starship init zsh)"
+fi
+
+# ---------------------
+# Zoxide (smart cd)
+# ---------------------
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init zsh)"
+    alias cd="z"
+fi
+
+# ---------------------
+# fzf
+# ---------------------
+if command -v fzf &> /dev/null; then
+    # fzf key bindings and completion
+    source <(fzf --zsh)
+
+    # fzf options
+    export FZF_DEFAULT_OPTS="
+        --height 40%
+        --layout=reverse
+        --border
+        --inline-info
+        --color=fg:#c0caf5,bg:#1a1b26,hl:#bb9af7
+        --color=fg+:#c0caf5,bg+:#292e42,hl+:#7dcfff
+        --color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff
+        --color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a
+    "
+
+    # Use fd for fzf if available
+    if command -v fd &> /dev/null; then
+        export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
+        export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+        export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git"
+    fi
+fi
+
+# ---------------------
+# mise (version manager)
+# ---------------------
+if command -v mise &> /dev/null; then
+    eval "$(mise activate zsh)"
+fi
+
+# ---------------------
+# ghq + fzf (repository management)
+# ---------------------
+if command -v ghq &> /dev/null; then
+    export GHQ_ROOT="$HOME/ghq"
+
+    # ghq + fzf: Ctrl+g to jump to repository
+    function ghq-fzf() {
+        local repo=$(ghq list | fzf --preview "eza --icons --tree --level=1 $(ghq root)/{}")
+        if [ -n "$repo" ]; then
+            cd "$(ghq root)/$repo"
+        fi
+    }
+    zle -N ghq-fzf
+    bindkey '^g' ghq-fzf
+
+    # Alias
+    alias repos="ghq-fzf"
+fi
+
+# ---------------------
+# GitHub CLI
+# ---------------------
+if command -v gh &> /dev/null; then
+    eval "$(gh completion -s zsh)"
+fi
+
+# ---------------------
+# Path
+# ---------------------
+# Homebrew
+if [[ -f /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# Local bin
+export PATH="$HOME/.local/bin:$PATH"

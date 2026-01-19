@@ -10,38 +10,96 @@ CONFIG_DIR="$HOME/.config"
 echo "=== Dotfiles Setup ==="
 
 # Create .config directory if it doesn't exist
-if [ ! -d "$CONFIG_DIR" ]; then
-    echo "Creating $CONFIG_DIR..."
-    mkdir -p "$CONFIG_DIR"
-fi
+mkdir -p "$CONFIG_DIR"
 
-# Backup existing nvim config if exists
+# ---------------------
+# Neovim
+# ---------------------
+echo ""
+echo "[nvim] Setting up..."
+
 if [ -d "$CONFIG_DIR/nvim" ] && [ ! -L "$CONFIG_DIR/nvim" ]; then
-    echo "Backing up existing nvim config to $CONFIG_DIR/nvim.bak..."
     mv "$CONFIG_DIR/nvim" "$CONFIG_DIR/nvim.bak"
+    echo "  Backed up existing config"
 elif [ -L "$CONFIG_DIR/nvim" ]; then
-    echo "Removing existing nvim symlink..."
     rm "$CONFIG_DIR/nvim"
 fi
-
-# Create symlink for nvim
-echo "Creating symlink for nvim..."
 ln -s "$DOTFILES_DIR/nvim" "$CONFIG_DIR/nvim"
+echo "  Symlink created"
 
+# ---------------------
+# Starship
+# ---------------------
+echo ""
+echo "[starship] Setting up..."
+
+if [ -f "$CONFIG_DIR/starship.toml" ] && [ ! -L "$CONFIG_DIR/starship.toml" ]; then
+    mv "$CONFIG_DIR/starship.toml" "$CONFIG_DIR/starship.toml.bak"
+    echo "  Backed up existing config"
+elif [ -L "$CONFIG_DIR/starship.toml" ]; then
+    rm "$CONFIG_DIR/starship.toml"
+fi
+ln -s "$DOTFILES_DIR/starship/starship.toml" "$CONFIG_DIR/starship.toml"
+echo "  Symlink created"
+
+# ---------------------
+# Lazygit
+# ---------------------
+echo ""
+echo "[lazygit] Setting up..."
+
+mkdir -p "$CONFIG_DIR/lazygit"
+if [ -f "$CONFIG_DIR/lazygit/config.yml" ] && [ ! -L "$CONFIG_DIR/lazygit/config.yml" ]; then
+    mv "$CONFIG_DIR/lazygit/config.yml" "$CONFIG_DIR/lazygit/config.yml.bak"
+    echo "  Backed up existing config"
+elif [ -L "$CONFIG_DIR/lazygit/config.yml" ]; then
+    rm "$CONFIG_DIR/lazygit/config.yml"
+fi
+ln -s "$DOTFILES_DIR/lazygit/config.yml" "$CONFIG_DIR/lazygit/config.yml"
+echo "  Symlink created"
+
+# ---------------------
+# Git
+# ---------------------
+echo ""
+echo "[git] Setting up..."
+
+if [ -f "$HOME/.gitconfig" ] && [ ! -L "$HOME/.gitconfig" ]; then
+    mv "$HOME/.gitconfig" "$HOME/.gitconfig.bak"
+    echo "  Backed up existing .gitconfig"
+elif [ -L "$HOME/.gitconfig" ]; then
+    rm "$HOME/.gitconfig"
+fi
+ln -s "$DOTFILES_DIR/git/gitconfig" "$HOME/.gitconfig"
+echo "  Symlink created"
+
+# ---------------------
+# Zsh
+# ---------------------
+echo ""
+echo "[zsh] Setting up..."
+
+if [ -f "$HOME/.zshrc" ] && [ ! -L "$HOME/.zshrc" ]; then
+    mv "$HOME/.zshrc" "$HOME/.zshrc.bak"
+    echo "  Backed up existing .zshrc"
+elif [ -L "$HOME/.zshrc" ]; then
+    rm "$HOME/.zshrc"
+fi
+ln -s "$DOTFILES_DIR/zsh/zshrc" "$HOME/.zshrc"
+echo "  Symlink created"
+
+# ---------------------
+# Done
+# ---------------------
 echo ""
 echo "=== Setup Complete ==="
 echo ""
-echo "Next steps:"
-echo "1. Make sure you have Neovim 0.9+ installed"
-echo "   - macOS: brew install neovim"
+echo "Install tools with Homebrew:"
 echo ""
-echo "2. Install required dependencies:"
-echo "   - brew install ripgrep fd"
-echo "   - npm install -g neovim"
+echo "  brew install neovim ripgrep fd"
+echo "  brew install starship zoxide fzf lazygit"
+echo "  brew install eza bat delta"
 echo ""
-echo "3. Start Neovim and let lazy.nvim install plugins:"
-echo "   - nvim"
-echo ""
-echo "4. Install LSP servers with Mason:"
-echo "   - :Mason"
+echo "Then restart your terminal or run:"
+echo "  source ~/.zshrc"
 echo ""
