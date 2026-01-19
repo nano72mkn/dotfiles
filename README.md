@@ -11,6 +11,7 @@ macOS development environment configuration.
 | `zsh/` | zshrc |
 | `starship/` | Prompt config |
 | `lazygit/` | Lazygit config |
+| `tmux/` | tmux config (session restore) |
 | `mise/` | Runtime versions (Go, Node, etc.) |
 | `Brewfile` | Homebrew packages |
 

@@ -126,6 +126,12 @@ if command -v ghq &> /dev/null; then
 fi
 
 # ---------------------
+# Completion system
+# ---------------------
+autoload -Uz compinit
+compinit
+
+# ---------------------
 # GitHub CLI
 # ---------------------
 if command -v gh &> /dev/null; then

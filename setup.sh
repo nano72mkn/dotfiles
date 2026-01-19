@@ -105,6 +105,27 @@ ln -s "$DOTFILES_DIR/zsh/zshrc" "$HOME/.zshrc"
 echo "  Symlink created"
 
 # ---------------------
+# tmux
+# ---------------------
+echo ""
+echo "[tmux] Setting up..."
+
+if [ -f "$HOME/.tmux.conf" ] && [ ! -L "$HOME/.tmux.conf" ]; then
+    mv "$HOME/.tmux.conf" "$HOME/.tmux.conf.bak"
+    echo "  Backed up existing .tmux.conf"
+elif [ -L "$HOME/.tmux.conf" ]; then
+    rm "$HOME/.tmux.conf"
+fi
+ln -s "$DOTFILES_DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
+echo "  Symlink created"
+
+# Install TPM if not exists
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+    echo "  Installing TPM..."
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
+# ---------------------
 # GitHub CLI (credential helper)
 # ---------------------
 echo ""
