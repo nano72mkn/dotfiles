@@ -111,8 +111,15 @@ echo ""
 echo "[gh] Setting up git credential..."
 
 if command -v gh &> /dev/null; then
-    gh auth setup-git
-    echo "  Git credential configured"
+    # Write credential config to local file (not tracked by dotfiles)
+    gh auth setup-git --hostname github.com
+    # Move credential config to .gitconfig.local
+    if grep -q "credential" "$HOME/.gitconfig" 2>/dev/null; then
+        grep -A2 '\[credential' "$HOME/.gitconfig" >> "$HOME/.gitconfig.local"
+        # Remove credential section from main gitconfig
+        sed -i '' '/\[credential/,/helper = /d' "$HOME/.gitconfig"
+    fi
+    echo "  Git credential configured in ~/.gitconfig.local"
 else
     echo "  gh not found, skipping"
 fi
