@@ -3,6 +3,17 @@
 # ===========================================
 
 # ---------------------
+# Path (must be first)
+# ---------------------
+# Homebrew
+if [[ -f /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# Local bin
+export PATH="$HOME/.local/bin:$PATH"
+
+# ---------------------
 # History
 # ---------------------
 HISTFILE=~/.zsh_history
@@ -120,14 +131,3 @@ fi
 if command -v gh &> /dev/null; then
     eval "$(gh completion -s zsh)"
 fi
-
-# ---------------------
-# Path
-# ---------------------
-# Homebrew
-if [[ -f /opt/homebrew/bin/brew ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-# Local bin
-export PATH="$HOME/.local/bin:$PATH"

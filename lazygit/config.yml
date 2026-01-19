@@ -28,17 +28,15 @@ git:
   paging:
     colorArg: always
     pager: delta --dark --paging=never
+  # Commit settings
+  commit:
+    signOff: false
 
 # Keybindings (default is mostly fine)
 keybinding:
   universal:
     quit: q
     return: <esc>
-
-# Commit settings
-git:
-  commit:
-    signOff: false
 
 os:
   # Open files with nvim

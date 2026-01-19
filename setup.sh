@@ -105,17 +105,27 @@ ln -s "$DOTFILES_DIR/zsh/zshrc" "$HOME/.zshrc"
 echo "  Symlink created"
 
 # ---------------------
+# GitHub CLI (credential helper)
+# ---------------------
+echo ""
+echo "[gh] Setting up git credential..."
+
+if command -v gh &> /dev/null; then
+    gh auth setup-git
+    echo "  Git credential configured"
+else
+    echo "  gh not found, skipping"
+fi
+
+# ---------------------
 # Done
 # ---------------------
 echo ""
 echo "=== Setup Complete ==="
 echo ""
-echo "Install tools with Homebrew:"
-echo ""
-echo "  brew install neovim ripgrep fd"
-echo "  brew install starship zoxide fzf lazygit"
-echo "  brew install eza bat delta"
-echo ""
-echo "Then restart your terminal or run:"
-echo "  source ~/.zshrc"
+echo "Next steps:"
+echo "  1. brew bundle --file=~/dotfiles/Brewfile"
+echo "  2. mise install"
+echo "  3. gh auth login  (if not logged in)"
+echo "  4. source ~/.zshrc"
 echo ""
