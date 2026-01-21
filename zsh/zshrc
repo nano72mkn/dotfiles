@@ -126,6 +126,87 @@ if command -v ghq &> /dev/null; then
 fi
 
 # ---------------------
+# Git worktree + fzf
+# ---------------------
+# gwt: Select and cd to worktree with fzf
+function gwt() {
+    if ! git rev-parse --is-inside-work-tree &> /dev/null; then
+        echo "Not a git repository"
+        return 1
+    fi
+    local selected=$(git worktree list | fzf --preview 'git log --oneline -10 {2}' | awk '{print $1}')
+    if [ -n "$selected" ]; then
+        cd "$selected"
+    fi
+}
+
+# Patterns to exclude from worktree copy (dirs and large files)
+GWT_COPY_EXCLUDE=(node_modules .git dist build coverage __pycache__ .venv venv "*.log")
+
+# gwta: Add new worktree (creates in parent directory)
+function gwta() {
+    if ! git rev-parse --is-inside-work-tree &> /dev/null; then
+        echo "Not a git repository"
+        return 1
+    fi
+    local branch="$1"
+    if [ -z "$branch" ]; then
+        # If no branch specified, select from remote branches with fzf
+        branch=$(git branch -r | sed 's/origin\///' | fzf --prompt="Select branch: ")
+        branch=$(echo "$branch" | xargs)  # trim whitespace
+    fi
+    if [ -z "$branch" ]; then
+        echo "No branch selected"
+        return 1
+    fi
+    local repo_root=$(git rev-parse --show-toplevel)
+    local repo_name=$(basename "$repo_root")
+    local worktree_path="$(dirname "$repo_root")/${repo_name}-${branch}"
+
+    if git worktree add "$worktree_path" "$branch"; then
+        # Copy gitignored files (excluding directories and large files)
+        local copied=()
+        if [[ -f "$repo_root/.gitignore" ]]; then
+            while IFS= read -r file; do
+                local basename=$(basename "$file")
+                local skip=false
+                for exclude in "${GWT_COPY_EXCLUDE[@]}"; do
+                    if [[ "$basename" == $~exclude ]]; then
+                        skip=true
+                        break
+                    fi
+                done
+                if ! $skip; then
+                    local rel_path="${file#$repo_root/}"
+                    local dest_dir="$worktree_path/$(dirname "$rel_path")"
+                    mkdir -p "$dest_dir"
+                    cp "$file" "$dest_dir/"
+                    copied+=("$rel_path")
+                fi
+            done < <(git -C "$repo_root" ls-files --others --ignored --exclude-standard | while read -r f; do
+                [[ -f "$repo_root/$f" ]] && echo "$repo_root/$f"
+            done)
+        fi
+        if [[ ${#copied[@]} -gt 0 ]]; then
+            echo "Copied ${#copied[@]} file(s): ${copied[*]}"
+        fi
+        cd "$worktree_path"
+    fi
+}
+
+# gwtrm: Remove worktree with fzf
+function gwtrm() {
+    if ! git rev-parse --is-inside-work-tree &> /dev/null; then
+        echo "Not a git repository"
+        return 1
+    fi
+    local selected=$(git worktree list | tail -n +2 | fzf --prompt="Remove worktree: " | awk '{print $1}')
+    if [ -n "$selected" ]; then
+        git worktree remove "$selected"
+    fi
+}
+
+# ---------------------
 # Completion system
 # ---------------------
 autoload -Uz compinit

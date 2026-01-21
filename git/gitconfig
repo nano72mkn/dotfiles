@@ -10,6 +10,12 @@
 	br = branch
 	df = diff
 	lg = log --oneline --graph --decorate
+	# worktree
+	wt = worktree
+	wta = worktree add
+	wtl = worktree list
+	wtrm = worktree remove
+	wtp = worktree prune
 
 [core]
 	editor = nvim
@@ -47,3 +53,5 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
+[ghq]
+	root = /Users/shota.miyahira/ghq

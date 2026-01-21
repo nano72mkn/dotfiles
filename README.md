@@ -59,3 +59,10 @@ mise install
 | `z <dir>` | zoxide jump |
 | `lg` | lazygit |
 | `repos` | ghq + fzf |
+| `gwt` | git worktree + fzf |
+| `gwta` | add worktree |
+| `gwtrm` | remove worktree |
+
+## Docs
+
+- [Git (worktree, aliases)](docs/git.md)
