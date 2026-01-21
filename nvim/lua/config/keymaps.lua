@@ -65,9 +65,10 @@ keymap("n", "<C-a>", "ggVG", opts)
 keymap("n", "<leader>sv", ":vsplit<CR>", opts)
 keymap("n", "<leader>sh", ":split<CR>", opts)
 
--- nvim-tree (replacing NERDTree)
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
-keymap("n", "se", ":NvimTreeToggle<CR>", opts) -- Keep your old binding
+-- neo-tree
+keymap("n", "<leader>e", ":Neotree toggle<CR>", opts)
+keymap("n", "se", ":Neotree toggle<CR>", opts)
+keymap("n", "<leader>o", ":Neotree reveal<CR>", opts)
 
 -- Telescope (replacing fzf)
 keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
