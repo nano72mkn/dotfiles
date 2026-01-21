@@ -1,6 +1,16 @@
 -- Basic Neovim options
 local opt = vim.opt
 
+-- Ensure PATH includes nodenv, aqua, and mise shims for LSP tools
+local home = vim.env.HOME
+local path_additions = {
+  home .. "/.nodenv/shims",
+  home .. "/.local/share/aquaproj-aqua/bin",
+  home .. "/.local/share/mise/shims",
+  "/opt/homebrew/bin",
+}
+vim.env.PATH = table.concat(path_additions, ":") .. ":" .. vim.env.PATH
+
 -- Encoding
 opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"
