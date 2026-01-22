@@ -166,27 +166,24 @@ function gwta() {
     if git worktree add "$worktree_path" "$branch"; then
         # Copy gitignored files (excluding directories and large files)
         local copied=()
-        if [[ -f "$repo_root/.gitignore" ]]; then
-            while IFS= read -r file; do
-                local basename=$(basename "$file")
-                local skip=false
-                for exclude in "${GWT_COPY_EXCLUDE[@]}"; do
-                    if [[ "$basename" == $~exclude ]]; then
-                        skip=true
-                        break
-                    fi
-                done
-                if ! $skip; then
-                    local rel_path="${file#$repo_root/}"
-                    local dest_dir="$worktree_path/$(dirname "$rel_path")"
-                    mkdir -p "$dest_dir"
-                    cp "$file" "$dest_dir/"
-                    copied+=("$rel_path")
+        local files=(${(f)"$(git -C "$repo_root" ls-files --others --ignored --exclude-standard)"})
+        for f in "${files[@]}"; do
+            [[ -f "$repo_root/$f" ]] || continue
+            local basename=$(basename "$f")
+            local skip=false
+            for exclude in "${GWT_COPY_EXCLUDE[@]}"; do
+                if [[ "$basename" == $~exclude ]]; then
+                    skip=true
+                    break
                 fi
-            done < <(git -C "$repo_root" ls-files --others --ignored --exclude-standard | while read -r f; do
-                [[ -f "$repo_root/$f" ]] && echo "$repo_root/$f"
-            done)
-        fi
+            done
+            if ! $skip; then
+                local dest_dir="$worktree_path/$(dirname "$f")"
+                mkdir -p "$dest_dir"
+                cp "$repo_root/$f" "$dest_dir/"
+                copied+=("$f")
+            fi
+        done
         if [[ ${#copied[@]} -gt 0 ]]; then
             echo "Copied ${#copied[@]} file(s): ${copied[*]}"
         fi
