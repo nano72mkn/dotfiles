@@ -140,8 +140,8 @@ function gwt() {
     fi
 }
 
-# Patterns to exclude from worktree copy (dirs and large files)
-GWT_COPY_EXCLUDE=(node_modules .git dist build coverage __pycache__ .venv venv "*.log")
+# File patterns to copy to new worktree (e.g., env files)
+GWT_COPY_PATTERNS=(".env" ".env.*")
 
 # gwta: Add new worktree (creates in parent directory)
 function gwta() {
@@ -151,8 +151,8 @@ function gwta() {
     fi
     local branch="$1"
     if [ -z "$branch" ]; then
-        # If no branch specified, select from remote branches with fzf
-        branch=$(git branch -r | sed 's/origin\///' | fzf --prompt="Select branch: ")
+        # If no branch specified, select from local and remote branches with fzf
+        branch=$(git branch -a | sed 's/^[* ]*//' | sed 's|remotes/origin/||' | grep -v 'HEAD' | sort -u | fzf --prompt="Select branch: ")
         branch=$(echo "$branch" | xargs)  # trim whitespace
     fi
     if [ -z "$branch" ]; then
@@ -163,29 +163,25 @@ function gwta() {
     local repo_name=$(basename "$repo_root")
     local worktree_path="$(dirname "$repo_root")/${repo_name}-${branch}"
 
-    if git worktree add "$worktree_path" "$branch"; then
-        # Copy gitignored files (excluding directories and large files)
+    local git_add_cmd
+    if git show-ref --verify --quiet "refs/heads/$branch" || git show-ref --verify --quiet "refs/remotes/origin/$branch"; then
+        git_add_cmd=(git worktree add "$worktree_path" "$branch")
+    else
+        echo "Branch '$branch' does not exist. Creating new branch from HEAD."
+        git_add_cmd=(git worktree add -b "$branch" "$worktree_path")
+    fi
+    if "${git_add_cmd[@]}"; then
+        # Copy files matching GWT_COPY_PATTERNS to new worktree
         local copied=()
-        local files=(${(f)"$(git -C "$repo_root" ls-files --others --ignored --exclude-standard)"})
-        for f in "${files[@]}"; do
-            [[ -f "$repo_root/$f" ]] || continue
-            local basename=$(basename "$f")
-            local skip=false
-            for exclude in "${GWT_COPY_EXCLUDE[@]}"; do
-                if [[ "$basename" == $~exclude ]]; then
-                    skip=true
-                    break
-                fi
+        for pattern in "${GWT_COPY_PATTERNS[@]}"; do
+            for f in "$repo_root"/${~pattern}(N); do
+                local name="${f#$repo_root/}"
+                cp "$f" "$worktree_path/$name"
+                copied+=("$name")
             done
-            if ! $skip; then
-                local dest_dir="$worktree_path/$(dirname "$f")"
-                mkdir -p "$dest_dir"
-                cp "$repo_root/$f" "$dest_dir/"
-                copied+=("$f")
-            fi
         done
         if [[ ${#copied[@]} -gt 0 ]]; then
-            echo "Copied ${#copied[@]} file(s): ${copied[*]}"
+            echo "Copied: ${copied[*]}"
         fi
         cd "$worktree_path"
     fi
@@ -199,7 +195,13 @@ function gwtrm() {
     fi
     local selected=$(git worktree list | tail -n +2 | fzf --prompt="Remove worktree: " | awk '{print $1}')
     if [ -n "$selected" ]; then
-        git worktree remove "$selected"
+        echo -n "Force remove? (y/N): "
+        read answer
+        if [[ "$answer" =~ ^[Yy]$ ]]; then
+            git worktree remove --force "$selected"
+        else
+            git worktree remove "$selected"
+        fi
     fi
 }
 
@@ -215,3 +217,8 @@ compinit
 if command -v gh &> /dev/null; then
     eval "$(gh completion -s zsh)"
 fi
+
+# ---------------------
+# Local config (machine-specific, not in git)
+# ---------------------
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
