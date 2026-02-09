@@ -128,6 +128,51 @@ fi
 # ---------------------
 # Git worktree + fzf
 # ---------------------
+# gwtclean: Remove worktrees whose branches are already merged
+function gwtclean() {
+    if ! git rev-parse --is-inside-work-tree &> /dev/null; then
+        echo "Not a git repository"
+        return 1
+    fi
+    local main_branch=$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's|refs/remotes/origin/||')
+    if [ -z "$main_branch" ]; then
+        main_branch="main"
+    fi
+    local merged_branches=$(git branch --merged "$main_branch" | sed 's/^[* ]*//' | grep -v "^${main_branch}$")
+    if [ -z "$merged_branches" ]; then
+        echo "No merged branches found"
+        return 0
+    fi
+    local targets=()
+    while IFS= read -r line; do
+        local wt_path=$(echo "$line" | awk '{print $1}')
+        local wt_branch=$(echo "$line" | sed 's/.*\[//' | sed 's/\]//')
+        if echo "$merged_branches" | grep -qx "$wt_branch"; then
+            targets+=("$wt_path ($wt_branch)")
+        fi
+    done < <(git worktree list | tail -n +2)
+    if [ ${#targets[@]} -eq 0 ]; then
+        echo "No worktrees with merged branches"
+        return 0
+    fi
+    echo "Worktrees with merged branches:"
+    for t in "${targets[@]}"; do
+        echo "  $t"
+    done
+    echo ""
+    echo -n "Remove all? (y/N): "
+    read answer
+    if [[ "$answer" =~ ^[Yy]$ ]]; then
+        for t in "${targets[@]}"; do
+            local path=$(echo "$t" | sed 's/ (.*//')
+            local branch=$(echo "$t" | sed 's/.*(\(.*\))/\1/')
+            git worktree remove "$path" && echo "Removed worktree: $path"
+            git branch -d "$branch" 2>/dev/null && echo "Deleted branch: $branch"
+        done
+        git worktree prune
+    fi
+}
+
 # gwt: Select and cd to worktree with fzf
 function gwt() {
     if ! git rev-parse --is-inside-work-tree &> /dev/null; then
@@ -141,7 +186,7 @@ function gwt() {
 }
 
 # File patterns to copy to new worktree (e.g., env files)
-GWT_COPY_PATTERNS=(".env" ".env.*")
+GWT_COPY_PATTERNS=(".env" ".env.*" ".local_memo")
 
 # gwta: Add new worktree (creates in parent directory)
 function gwta() {
@@ -176,7 +221,7 @@ function gwta() {
         for pattern in "${GWT_COPY_PATTERNS[@]}"; do
             for f in "$repo_root"/${~pattern}(N); do
                 local name="${f#$repo_root/}"
-                cp "$f" "$worktree_path/$name"
+                cp -r "$f" "$worktree_path/$name"
                 copied+=("$name")
             done
         done

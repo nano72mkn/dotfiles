@@ -62,6 +62,7 @@ mise install
 | `gwt` | git worktree + fzf |
 | `gwta` | add worktree |
 | `gwtrm` | remove worktree |
+| `gwtclean` | remove merged worktrees |
 
 ## Docs
 

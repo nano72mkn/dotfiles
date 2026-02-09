@@ -33,6 +33,7 @@ git wtp     # worktree prune
 | `gwt` | fzfでworktreeを選択してcd |
 | `gwta [branch]` | worktreeを作成してcd |
 | `gwtrm` | fzfでworktreeを選択して削除 |
+| `gwtclean` | マージ済みブランチのworktreeを一括削除 |
 
 ### Usage examples
 
@@ -67,7 +68,7 @@ git wtp
 **コピーされる例:**
 - `.env`, `.env.local`
 - `.env.development.local`
-- IDE設定ファイル
+- `.local_memo` ディレクトリ
 
 **除外されるもの（大きいディレクトリ等）:**
 - `node_modules`, `.git`, `dist`, `build`
@@ -98,6 +99,9 @@ gwt  # fzf shows all worktrees
 
 # 5. Clean up when done
 gwtrm
+
+# 6. Or clean up all merged worktrees at once
+gwtclean
 ```
 
 ### Directory structure
