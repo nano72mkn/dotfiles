@@ -186,7 +186,7 @@ function gwt() {
 }
 
 # File patterns to copy to new worktree (e.g., env files)
-GWT_COPY_PATTERNS=(".env" ".env.*" ".local_memo")
+GWT_COPY_PATTERNS=(".env" ".env.*" ".local_memo" ".skeema")
 
 # gwta: Add new worktree (creates in parent directory)
 function gwta() {
