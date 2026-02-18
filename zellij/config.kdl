@@ -1,0 +1,111 @@
+// ===========================================
+// Zellij configuration
+// ===========================================
+
+// ---------------------
+// Keybindings
+// ---------------------
+keybinds {
+    // Use Ctrl+Space as the main modifier
+    shared_except "locked" {
+        bind "Ctrl Space" { SwitchToMode "Normal"; }
+    }
+
+    // Normal mode (default)
+    normal {
+        bind "Ctrl Space" { SwitchToMode "Tmux"; }
+    }
+
+    // Tmux mode (like prefix mode)
+    tmux {
+        bind "Esc" { SwitchToMode "Normal"; }
+        bind "Ctrl Space" { Write 2; SwitchToMode "Normal"; } // Send Ctrl+Space to terminal
+
+        // Panes
+        bind "h" { MoveFocus "Left"; SwitchToMode "Normal"; }
+        bind "j" { MoveFocus "Down"; SwitchToMode "Normal"; }
+        bind "k" { MoveFocus "Up"; SwitchToMode "Normal"; }
+        bind "l" { MoveFocus "Right"; SwitchToMode "Normal"; }
+        bind "|" { NewPane "Right"; SwitchToMode "Normal"; }
+        bind "-" { NewPane "Down"; SwitchToMode "Normal"; }
+        bind "x" { CloseFocus; SwitchToMode "Normal"; }
+        bind "z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
+
+        // Tabs
+        bind "c" { NewTab; SwitchToMode "Normal"; }
+        bind "," { SwitchToMode "RenameTab"; }
+        bind "n" { GoToNextTab; SwitchToMode "Normal"; }
+        bind "p" { GoToPreviousTab; SwitchToMode "Normal"; }
+        bind "1" { GoToTab 1; SwitchToMode "Normal"; }
+        bind "2" { GoToTab 2; SwitchToMode "Normal"; }
+        bind "3" { GoToTab 3; SwitchToMode "Normal"; }
+        bind "4" { GoToTab 4; SwitchToMode "Normal"; }
+        bind "5" { GoToTab 5; SwitchToMode "Normal"; }
+        bind "6" { GoToTab 6; SwitchToMode "Normal"; }
+        bind "7" { GoToTab 7; SwitchToMode "Normal"; }
+        bind "8" { GoToTab 8; SwitchToMode "Normal"; }
+        bind "9" { GoToTab 9; SwitchToMode "Normal"; }
+
+        // Sessions
+        bind "d" { Detach; }
+        bind "s" { SwitchToMode "Session"; }
+
+        // Modes
+        bind "[" { SwitchToMode "Scroll"; }
+        bind "r" { SwitchToMode "Resize"; }
+        bind "Space" { NextSwapLayout; SwitchToMode "Normal"; }
+    }
+
+    // Scroll mode (copy mode)
+    scroll {
+        bind "e" { EditScrollback; SwitchToMode "Normal"; }
+        bind "q" { SwitchToMode "Normal"; }
+        bind "Ctrl c" { ScrollToBottom; SwitchToMode "Normal"; }
+        bind "Esc" { SwitchToMode "Normal"; }
+        bind "j" "Down" { ScrollDown; }
+        bind "k" "Up" { ScrollUp; }
+        bind "Ctrl f" "PageDown" { PageScrollDown; }
+        bind "Ctrl b" "PageUp" { PageScrollUp; }
+        bind "d" { HalfPageScrollDown; }
+        bind "u" { HalfPageScrollUp; }
+    }
+}
+
+// ---------------------
+// Copy settings (vi-style)
+// ---------------------
+copy_command "pbcopy"  // macOS clipboard
+copy_on_select true
+
+// ---------------------
+// General settings
+// ---------------------
+default_shell "zsh"
+pane_frames false      // No borders around panes (minimal look)
+simplified_ui true     // Simplified UI
+theme "tokyo-night"    // Theme (can be changed)
+
+// Mouse support (enabled by default)
+mouse_mode true
+
+// Scrollback buffer
+scrollback_editor "nvim"
+
+// Session behavior
+on_force_close "quit"
+session_serialization true  // Save/restore sessions automatically
+
+// ---------------------
+// UI settings
+// ---------------------
+ui {
+    pane_frames {
+        rounded_corners true
+    }
+}
+
+// ---------------------
+// Layouts
+// ---------------------
+// Default layout when creating new tabs
+default_layout "compact"

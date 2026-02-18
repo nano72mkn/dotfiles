@@ -17,7 +17,7 @@ brew "delta"     # diff
 # Shell
 brew "starship"  # prompt
 brew "zoxide"    # smart cd
-brew "tmux"      # terminal multiplexer
+brew "zellij"    # terminal multiplexer
 
 # Git
 brew "lazygit"

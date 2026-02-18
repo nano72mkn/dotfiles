@@ -105,25 +105,20 @@ ln -s "$DOTFILES_DIR/zsh/zshrc" "$HOME/.zshrc"
 echo "  Symlink created"
 
 # ---------------------
-# tmux
+# Zellij
 # ---------------------
 echo ""
-echo "[tmux] Setting up..."
+echo "[zellij] Setting up..."
 
-if [ -f "$HOME/.tmux.conf" ] && [ ! -L "$HOME/.tmux.conf" ]; then
-    mv "$HOME/.tmux.conf" "$HOME/.tmux.conf.bak"
-    echo "  Backed up existing .tmux.conf"
-elif [ -L "$HOME/.tmux.conf" ]; then
-    rm "$HOME/.tmux.conf"
+mkdir -p "$CONFIG_DIR/zellij"
+if [ -f "$CONFIG_DIR/zellij/config.kdl" ] && [ ! -L "$CONFIG_DIR/zellij/config.kdl" ]; then
+    mv "$CONFIG_DIR/zellij/config.kdl" "$CONFIG_DIR/zellij/config.kdl.bak"
+    echo "  Backed up existing config.kdl"
+elif [ -L "$CONFIG_DIR/zellij/config.kdl" ]; then
+    rm "$CONFIG_DIR/zellij/config.kdl"
 fi
-ln -s "$DOTFILES_DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
+ln -s "$DOTFILES_DIR/zellij/config.kdl" "$CONFIG_DIR/zellij/config.kdl"
 echo "  Symlink created"
-
-# Install TPM if not exists
-if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
-    echo "  Installing TPM..."
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
 
 # ---------------------
 # GitHub CLI (credential helper)
